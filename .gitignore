@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# volumes
+tailscale/
+qbittorrent/
+
+# environment variables
+.env
