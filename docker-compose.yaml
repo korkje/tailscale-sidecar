@@ -24,6 +24,16 @@ services:
       - GROUP_ID=100
       - TZ=${QBT_TZ}
       - FF_PREF_PRIVATE=browser.privatebrowsing.autostart=true
+      - FF_PREF_THEME=extensions.activeThemeID="firefox-compact-dark@mozilla.org"
+      - FF_PREF_DARK_UI=ui.systemUsesDarkTheme=1
+      - FF_PREF_DARK_CONTENT=layout.css.prefers-color-scheme.content-override=0
+      - FF_PREF_NO_FXA=identity.fxaccounts.enabled=false
+      - FF_PREF_NO_WELCOME=browser.aboutwelcome.enabled=false
+      - FF_PREF_NO_WHATSNEW=browser.startup.homepage_override.mstone="ignore"
+      - FF_PREF_NO_DEFAULT_CHECK=browser.shell.checkDefaultBrowser=false
+      - FF_PREF_NEWTAB_NO_SPONSORED=browser.newtabpage.activity-stream.showSponsored=false
+      - FF_PREF_NEWTAB_NO_SPONSORED_SITES=browser.newtabpage.activity-stream.showSponsoredTopSites=false
+      - FF_PREF_NEWTAB_NO_STORIES=browser.newtabpage.activity-stream.feeds.section.topstories=false
     volumes:
       - ./firefox/config:/config
   tailscale:
