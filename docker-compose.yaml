@@ -37,6 +37,9 @@ services:
       - TS_USERSPACE=false
       - TS_ACCEPT_DNS=true
       - TS_EXTRA_ARGS=--exit-node=${TS_EXIT}
+      - TS_TAILSCALED_EXTRA_ARGS=--port=41641
+    ports:
+      - "41641:41641/udp"
     cap_add:
       - net_admin
     volumes:

@@ -7,6 +7,8 @@ Tailscale Serve routes both apps on the same hostname over HTTPS:
 - `https://<hostname>.<tailnet>.ts.net/` -> qBittorrent
 - `https://<hostname>.<tailnet>.ts.net/firefox/` -> Firefox (note the trailing slash)
 
+Tailscale's WireGuard port is pinned to UDP 41641 and published, so peers can reach the node directly instead of through a relay. Forwarding UDP 41641 on your router to the host makes direct connections even more reliable.
+
 Firefox is served by [jlesage/firefox](https://github.com/jlesage/docker-firefox) (noVNC, no audio, small image). It has no auth by default; set `VNC_PASSWORD` on the service to require a password.
 
 Create a `.env` file in the root directory and set the following variables:
