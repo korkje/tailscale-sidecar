@@ -23,6 +23,7 @@ services:
       - USER_ID=1026
       - GROUP_ID=100
       - TZ=${QBT_TZ}
+      - FF_PREF_PRIVATE=browser.privatebrowsing.autostart=true
     volumes:
       - ./firefox/config:/config
   tailscale:
