@@ -13,6 +13,19 @@ services:
     volumes:
       - ./qbittorrent/config:/config
       - ${QBT_MEDIA}:/media
+  firefox:
+    image: linuxserver/firefox
+    container_name: firefox
+    restart: unless-stopped
+    network_mode: service:tailscale
+    shm_size: "1gb"
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=${QBT_TZ}
+      - SUBFOLDER=/firefox/
+    volumes:
+      - ./firefox/config:/config
   tailscale:
     image: tailscale/tailscale:stable
     container_name: tailscale

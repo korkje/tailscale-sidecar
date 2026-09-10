@@ -9,6 +9,9 @@
             "Handlers": {
                 "/": {
                     "Proxy": "http://localhost:8080"
+                },
+                "/firefox": {
+                    "Proxy": "http://localhost:3000/firefox"
                 }
             }
         }

@@ -4,6 +4,7 @@
 # volumes
 tailscale/
 qbittorrent/
+firefox/
 
 # environment variables
 .env
