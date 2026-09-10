@@ -1,6 +1,6 @@
-# qbittorrent-tailscale
+# tailscale-sidecar
 
-Docker compose setup for qBittorrent and Tailscale, plus a Firefox instance whose traffic also goes through the Tailscale exit node.
+Docker compose setup where a Tailscale container acts as the network sidecar for other services, so all their traffic goes through a Tailscale exit node. Currently runs qBittorrent and Firefox.
 
 Tailscale Serve routes both apps on the same hostname over HTTPS:
 
@@ -15,7 +15,7 @@ Create a `.env` file in the root directory and set the following variables:
 
 ```
 TS_AUTHKEY=<your tailscale auth key>
-TS_HOSTNAME=<hostname for the Tailscale service (e.g. qbt)>
+TS_HOSTNAME=<hostname for the Tailscale service (e.g. sidecar)>
 TS_EXIT=<exit node IP address (e.g. 1.2.3.4)>
 QBT_MEDIA=<path to media directory (e.g. /volume1/media)>
 QBT_TZ=<your timezone (e.g. Europe/Oslo)>

@@ -1,5 +1,5 @@
 version: "3.9"
-name: qbittorrent-tailscale
+name: tailscale-sidecar
 services:
   qbittorrent:
     image: linuxserver/qbittorrent
