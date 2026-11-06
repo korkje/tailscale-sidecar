@@ -22,3 +22,30 @@ QBT_TZ=<your timezone (e.g. Europe/Oslo)>
 ```
 
 To disable qBittorrent's auth, set `WebUI\LocalHostAuth=false` under `[Preferences]` in `qbittorrent/config/qBittorrent/qBittorrent.conf` while the container is stopped, but after having run `docker compose up -d` for the first time.
+
+## Surviving NAS reboots (Synology)
+
+`restart: unless-stopped` is not enough for the two sidecar'd services. On boot, Docker restores
+all containers in parallel, and if `qbittorrent`/`firefox` are started before `tailscale` is up
+they fail with `cannot join network of a non running container` (exit code 128). Docker does not
+retry a failed start, so they stay down until someone runs `docker compose up -d`.
+
+Fix: add a boot-triggered task in DSM that brings the project up once Docker is ready.
+
+Control Panel -> Task Scheduler -> Create -> Triggered Task -> User-defined script:
+
+- General: User `root`, Event `Boot-up`
+- Task Settings -> Run command:
+
+```sh
+#!/bin/sh
+# Wait up to 5 minutes for the Docker daemon, then bring the stack up.
+for i in $(seq 1 60); do
+  /usr/local/bin/docker info >/dev/null 2>&1 && break
+  sleep 5
+done
+cd /volume1/docker/tailscale-sidecar && /usr/local/bin/docker compose up -d
+```
+
+`docker compose up -d` is idempotent, so it is safe to run every boot. Compose already orders the
+start correctly because `network_mode: service:tailscale` is an implicit dependency.
